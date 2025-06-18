@@ -1,0 +1,17 @@
+oracledb
+selenium
+beautifulsoup4
+readability-lxml
+python-dotenv
+langchain
+langchain-community
+langchain-openai
+openai
+tqdm
+numpy
+flask
+flask-cors
+waitress
+flask-login
+requests
+python-dotenv
