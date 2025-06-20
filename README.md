@@ -1,23 +1,23 @@
-# 불로챗 (Bullroh Chat)
+# Bullroh Chat
 
-불로챗은 블로그 콘텐츠를 기반으로 한 AI 챗봇 서비스입니다. 이제 웹 인터페이스를 통해 쉽게 사용할 수 있습니다.
+Bullroh Chat is an AI-powered chatbot that answers questions based on blog content. It uses advanced natural language processing to provide accurate and context-aware responses.
 
-## 기능
+## Features
 
-- 블로그 크롤링을 통한 자동 학습
-- 자연어 기반 질의응답
-- 웹 기반 사용자 인터페이스
-- 실시간 채팅 기능
+- **Blog Crawling**: Automatically gathers and processes blog content
+- **Question Answering**: Provides precise answers to user queries
+- **Web Interface**: User-friendly interface for interacting with the chatbot
+- **Real-time Chat**: Interactive conversation interface
 
-## 설치 방법
+## Installation
 
-1. 저장소를 클론합니다:
+1. Clone the repository:
    ```bash
-   git clone [저장소 URL]
+   git clone [repository URL]
    cd bullrohchat
    ```
 
-2. 가상 환경을 생성하고 활성화합니다:
+2. Create and activate a virtual environment:
    ```bash
    # Windows
    python -m venv venv
@@ -28,63 +28,118 @@
    source venv/bin/activate
    ```
 
-3. 필요한 패키지를 설치합니다:
+3. Install required packages:
    ```bash
    pip install -r requirements.txt
    ```
 
-4. 환경 변수 설정 (`.env` 파일 생성):
+4. Set environment variables (create a `.env` file):
    ```
    OPENAI_API_KEY=your_openai_api_key
-   # 기타 필요한 환경 변수들
+   # Other required environment variables
    ```
 
-## 웹 인터페이스 사용 방법
+## Web Interface Usage
 
-1. 웹 애플리케이션을 실행합니다:
+1. Run the web application:
    ```bash
    python web_app.py
    ```
 
-2. 웹 브라우저에서 다음 주소로 접속합니다:
+2. Access the web interface in your browser:
    ```
    http://localhost:5000
    ```
 
-3. 웹 인터페이스에서 다음을 수행할 수 있습니다:
-   - 챗봇 시작/중지
-   - 실시간 채팅
-   - 대화 내역 확인
+3. Interact with the chatbot:
+   - Start/stop the chatbot
+   - Engage in real-time conversations
+   - View conversation history
 
-## API 서버 실행 방법
+## API Server Usage
 
-FastAPI 서버를 실행하려면 다음 명령어를 사용하세요:
+To run the FastAPI server, use the following command:
 
 ```bash
 python run_api.py
 ```
 
-API는 http://localhost:8000 에서 접근 가능합니다.
+The API is accessible at http://localhost:8000.
 
-### 사용 가능한 엔드포인트
+### Available Endpoints
 
-- `GET /ask?query=...`: 질문에 대한 답변을 반환합니다.
+- `GET /ask?query=...`: Returns answers to questions
 
-## 기존 CLI 명령어 사용
+### API Usage Examples
 
-기존 CLI 명령어는 그대로 사용 가능합니다:
-
+**Ask a question**
 ```bash
-# 온보딩 (초기 설정)
-python main.py onboard
-
-# 블로그 크롤링
-python main.py crawl
-
-# CLI에서 질문하기
-python main.py ask "질문 내용"
+curl "http://localhost:8000/ask?query=What's%20the%20best%20tire%20for%20winter"
 ```
 
-## 라이선스
+**Trigger blog crawling**
+```bash
+curl -X POST "http://localhost:8000/crawl?max_posts=10"
+```
 
-이 프로젝트는 [라이선스 유형] 라이선스 하에 있습니다.
+**Set up business information**
+```bash
+curl -X POST "http://localhost:8000/onboard" \
+  -d "business_name=AutoExpert" \
+  -d "blog_url=https://auto-blog.example.com" \
+  -d "chatbot_personality=Professional%20and%20technical"
+```
+
+## Podman Deployment
+
+1. Build the container image:
+   ```bash
+   podman build -t bullrohchat .
+   ```
+
+2. (Optional) Save the image:
+   ```bash
+   podman save -o bullrohchat.tar bullrohchat
+   ```
+
+3. Run the container:
+   ```bash
+   podman run -d --name bullrohchat-container -p 8000:8000 bullrohchat
+   ```
+
+4. Access the API:
+   http://localhost:8000
+
+## Existing CLI Commands
+
+You can still use the existing CLI commands:
+
+```bash
+# Onboarding (initial setup)
+python main.py onboard
+
+# Blog crawling
+python main.py crawl
+
+# Ask questions via CLI
+python main.py ask "Question content"
+```
+
+## Open Source Licenses
+
+This project uses the following open source libraries:
+
+- **FastAPI** (MIT License): https://github.com/tiangolo/fastapi
+- **uvicorn** (MIT License): https://github.com/encode/uvicorn
+- **python-dotenv** (BSD-3-Clause License): https://github.com/theskumar/python-dotenv
+- **requests** (Apache License 2.0): https://github.com/psf/requests
+- **beautifulsoup4** (MIT License): https://www.crummy.com/software/BeautifulSoup/
+- **oracledb** (Apache License 2.0): https://github.com/oracle/python-oracledb
+- **langchain** (MIT License): https://github.com/langchain-ai/langchain
+- **tiktoken** (MIT License): https://github.com/openai/tiktoken
+
+Check each library's official website for full license details. You must comply with all license requirements when distributing this project.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
